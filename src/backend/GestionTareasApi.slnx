@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="GestionTareasApi.Tests/GestionTareasApi.Tests.csproj" Id="0f02fbd5-3fa8-46ee-842e-cf99c3cbabc8" />
   <Project Path="GestionTareasApi/GestionTareasApi.csproj" />
 </Solution>
