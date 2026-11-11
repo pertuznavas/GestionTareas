@@ -25,6 +25,8 @@ dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=(localdb)\
 dotnet ef database update
 ```
 
+Consultas de ejemplo sobre la columna JSON en `database/queries.sql`.
+
 ## Ejecutar
 
 API (https://localhost:7100, documentación en `/scalar`):
