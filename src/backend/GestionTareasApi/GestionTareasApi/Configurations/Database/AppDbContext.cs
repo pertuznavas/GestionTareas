@@ -34,6 +34,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             entity.HasOne(t => t.User).WithMany(u => u.Tasks).HasForeignKey(t => t.UserId).OnDelete(DeleteBehavior.Restrict);
 
             entity.HasIndex(t => new { t.UserId, t.Status, t.CreatedAt });
+
+            entity.Property(t => t.AdditionalInfo).HasColumnType("nvarchar(max)");
+
+            entity.ToTable(t => t.HasCheckConstraint(
+                "CK_Tasks_AdditionalInfo_IsJson",
+                "ISJSON([AdditionalInfo]) = 1"));
         });
     }
 }

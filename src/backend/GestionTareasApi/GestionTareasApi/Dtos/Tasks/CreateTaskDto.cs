@@ -13,4 +13,5 @@ public record CreateTaskDto
 
     [Range(1, int.MaxValue)]
     public int UserId { get; init; }
+    public TaskAdditionalInfoDto? AdditionalInfo { get; init; }
 }
