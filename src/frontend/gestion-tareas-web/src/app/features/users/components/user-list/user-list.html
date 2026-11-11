@@ -1,0 +1,50 @@
+<h2>Usuarios</h2>
+
+<form class="form" [formGroup]="form" (ngSubmit)="save()">
+  <label>
+    Nombre
+    <input formControlName="name" />
+    @if (form.controls.name.touched && form.controls.name.invalid) {
+      <span class="error">Entre 3 y 50 caracteres.</span>
+    }
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email" />
+    @if (form.controls.email.touched && form.controls.email.invalid) {
+      <span class="error">Ingresa un email válido.</span>
+    }
+  </label>
+
+  <button type="submit">Crear usuario</button>
+</form>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Creado</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users(); track user.id) {
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.createdAt | date: 'short' }}</td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">No hay usuarios.</td>
+      </tr>
+    }
+  </tbody>
+</table>

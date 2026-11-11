@@ -1,0 +1,68 @@
+<h2>Nueva tarea</h2>
+
+<form class="form" [formGroup]="form" (ngSubmit)="save()">
+  <label>
+    Título
+    <input formControlName="title" />
+    @if (form.controls.title.touched && form.controls.title.invalid) {
+      <span class="error">Entre 3 y 50 caracteres.</span>
+    }
+  </label>
+
+  <label>
+    Descripción
+    <textarea formControlName="description" rows="3"></textarea>
+    @if (form.controls.description.invalid) {
+      <span class="error">Máximo 150 caracteres.</span>
+    }
+  </label>
+
+  <label>
+    Usuario
+    <select formControlName="userId">
+      <option [ngValue]="0" disabled>Selecciona un usuario</option>
+      @for (user of users(); track user.id) {
+        <option [ngValue]="user.id">{{ user.name }}</option>
+      }
+    </select>
+    @if (form.controls.userId.touched && form.controls.userId.invalid) {
+      <span class="error">Selecciona un usuario.</span>
+    }
+  </label>
+
+  <fieldset>
+    <legend>Información adicional (opcional)</legend>
+
+    <div class="form">
+      <label>
+        Prioridad
+        <select formControlName="priority">
+          <option value="">Sin prioridad</option>
+          @for (priority of priorities; track priority) {
+            <option [value]="priority">{{ priority }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Fecha estimada de fin
+        <input type="date" formControlName="estimatedEndDate" />
+      </label>
+
+      <label>
+        Etiquetas
+        <input formControlName="tags" placeholder="frontend, auth, ui" />
+        <span class="hint">Separadas por coma.</span>
+      </label>
+    </div>
+  </fieldset>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <div>
+    <button type="submit">Crear tarea</button>
+    <a routerLink="/tasks">Cancelar</a>
+  </div>
+</form>
