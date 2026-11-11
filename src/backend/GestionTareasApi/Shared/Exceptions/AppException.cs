@@ -1,21 +1,15 @@
-﻿namespace GestionTareasApi.Shared.Exceptions
+﻿namespace GestionTareasApi.Shared.Exceptions;
+
+public class AppException : Exception
 {
-    public class AppException : Exception
+    public AppException()
+    {   
+    }
+    public AppException(string message):base(message)
     {
-        public int ErrorCode { get; private set; }
+    }
 
-        public AppException()
-        {
-            
-        }
-        public AppException(int errorCode, string message):base(message)
-        {
-            ErrorCode = errorCode;
-        }
-
-        public AppException(int errorCode, string? message, Exception? innerException) : base(message, innerException)
-        {
-            ErrorCode = errorCode;
-        }
+    public AppException(string? message, Exception? innerException) : base(message, innerException)
+    {
     }
 }

@@ -74,6 +74,6 @@ public class TaskService(AppDbContext db) : ITaskService
         };
 
         if (!allowed)
-            throw new BadRequestException(400, $"Status transition not allowed: from {current} to {next}");
+            throw new BadRequestException($"Status transition not allowed: from {current} to {next}");
     }
 }

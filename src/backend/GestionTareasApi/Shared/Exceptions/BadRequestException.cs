@@ -1,17 +1,16 @@
-﻿namespace GestionTareasApi.Shared.Exceptions
+﻿namespace GestionTareasApi.Shared.Exceptions;
+
+public class BadRequestException : AppException
 {
-    public class BadRequestException : AppException
+    public BadRequestException()
     {
-        public BadRequestException()
-        {
-        }
+    }
 
-        public BadRequestException(int errorCode, string message) : base(errorCode, message)
-        {
-        }
+    public BadRequestException(string message) : base(message)
+    {
+    }
 
-        public BadRequestException(int errorCode, string? message, Exception? innerException) : base(errorCode, message, innerException)
-        {
-        }
+    public BadRequestException(string? message, Exception? innerException) : base(message, innerException)
+    {
     }
 }

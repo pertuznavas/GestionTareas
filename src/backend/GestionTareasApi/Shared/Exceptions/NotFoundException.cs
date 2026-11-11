@@ -1,17 +1,16 @@
-﻿namespace GestionTareasApi.Shared.Exceptions
+﻿namespace GestionTareasApi.Shared.Exceptions;
+
+public class NotFoundException : AppException
 {
-    public class NotFoundException : AppException
+    public NotFoundException()
     {
-        public NotFoundException()
-        {
-        }
+    }
 
-        public NotFoundException(int errorCode, string message) : base(errorCode, message)
-        {
-        }
+    public NotFoundException(int errorCode, string message) : base(message)
+    {
+    }
 
-        public NotFoundException(int errorCode, string? message, Exception? innerException) : base(errorCode, message, innerException)
-        {
-        }
+    public NotFoundException(int errorCode, string? message, Exception? innerException) : base(message, innerException)
+    {
     }
 }
