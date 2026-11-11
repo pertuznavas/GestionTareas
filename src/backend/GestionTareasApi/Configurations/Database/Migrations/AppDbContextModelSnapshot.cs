@@ -30,6 +30,9 @@ namespace GestionTareasApi.Configurations.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AdditionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -55,7 +58,10 @@ namespace GestionTareasApi.Configurations.Database.Migrations
 
                     b.HasIndex("UserId", "Status", "CreatedAt");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", t =>
+                        {
+                            t.HasCheckConstraint("CK_Tasks_AdditionalInfo_IsJson", "ISJSON([AdditionalInfo]) = 1");
+                        });
                 });
 
             modelBuilder.Entity("GestionTareasApi.Entities.User", b =>
