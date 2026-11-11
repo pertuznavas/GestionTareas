@@ -8,6 +8,7 @@ public static class DependencyInjection
     public static IServiceCollection AddDependencies(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITaskService, TaskService>();
 
         return services;
     }

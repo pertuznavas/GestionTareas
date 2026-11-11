@@ -1,3 +1,5 @@
-﻿namespace GestionTareasApi.Dtos.Tasks;
+﻿using GestionTareasApi.Enums;
 
-public record TaskDto(int Id, string Title, string? Description, DateTime CreatedAt);
+namespace GestionTareasApi.Dtos.Tasks;
+
+public record TaskDto(int Id, string Title, string? Description, TaskItemStatus Status, int UserId, DateTime CreatedAt);

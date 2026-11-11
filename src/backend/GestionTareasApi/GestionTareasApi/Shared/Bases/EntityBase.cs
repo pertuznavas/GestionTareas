@@ -8,7 +8,7 @@ public abstract class EntityBase<TId>
 {
     public TId? Id { get; set; }
     public required DateTime CreatedAt { get; set; }
-    public DateTime? UdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }
 
 /// <summary>

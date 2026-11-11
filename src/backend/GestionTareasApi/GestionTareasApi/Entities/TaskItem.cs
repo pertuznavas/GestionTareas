@@ -1,4 +1,5 @@
-﻿using GestionTareasApi.Shared.Bases;
+﻿using GestionTareasApi.Enums;
+using GestionTareasApi.Shared.Bases;
 
 namespace GestionTareasApi.Entities;
 
@@ -6,7 +7,7 @@ public class TaskItem : EntityBase
 {
     public required string Title { get; set; }
     public string? Description { get; set; }
-    public TaskStatus Status { get; set; }
+    public TaskItemStatus Status { get; set; } = TaskItemStatus.Pending;
 
     // Relations
     public int UserId { get; set; }

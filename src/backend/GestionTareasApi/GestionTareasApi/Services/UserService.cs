@@ -23,7 +23,6 @@ public class UserService(AppDbContext db) : IUserService
 
     public async Task<List<UserDto>> GetUsersAsync()
     {
-        var users = await db.Users.AsNoTracking().ToListAsync();
-        return [.. users.Select(u => u.ToDto())];
+        return await db.Users.Select(u => u.ToDto()).ToListAsync();
     }
 }

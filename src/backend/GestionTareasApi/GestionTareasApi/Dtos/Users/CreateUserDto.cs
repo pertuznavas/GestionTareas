@@ -10,6 +10,6 @@ public record CreateUserDto
 
     [Required]
     [EmailAddress]
-    [StringLength(50, MinimumLength = 5)]
+    [StringLength(100, MinimumLength = 5)]
     public required string Email { get; set; }
 }

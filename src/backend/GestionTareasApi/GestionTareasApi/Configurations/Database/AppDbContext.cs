@@ -19,13 +19,19 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
             entity.Property(u => u.Name).HasMaxLength(50).IsRequired();
 
-            entity.Property(u => u.Email).HasMaxLength(50).IsRequired();
+            entity.Property(u => u.Email).HasMaxLength(100).IsRequired();
             entity.HasIndex(u => u.Email).IsUnique();
         });
 
         modelBuilder.Entity<TaskItem>(entity =>
         {
-           
+            entity.HasKey(t => t.Id);
+            entity.Property(t => t.Id).UseIdentityColumn();
+
+            entity.Property(t => t.Title).HasMaxLength(50).IsRequired();
+            entity.Property(t => t.Description).HasMaxLength(150);
+
+            entity.HasOne(t => t.User).WithMany(u => u.Tasks).HasForeignKey(t => t.UserId).OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

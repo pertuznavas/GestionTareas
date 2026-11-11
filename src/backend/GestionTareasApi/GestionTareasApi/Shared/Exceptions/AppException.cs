@@ -8,14 +8,14 @@
         {
             
         }
-        public AppException(int erroCode, string message):base(message)
+        public AppException(int errorCode, string message):base(message)
         {
-            ErrorCode = erroCode;
+            ErrorCode = errorCode;
         }
 
-        public AppException(int erroCode, string? message, Exception? innerException) : base(message, innerException)
+        public AppException(int errorCode, string? message, Exception? innerException) : base(message, innerException)
         {
-            ErrorCode = erroCode;
+            ErrorCode = errorCode;
         }
     }
 }
