@@ -65,7 +65,7 @@ export class TaskList {
 
   private onUpdated(updated: Task): void {
     this.error.set(null);
-    // Con filtro activo, si la tarea ya no cumple se recarga para que salga de la lista.
+    // With an active filter, reload when the task no longer matches so it leaves the list.
     if (this.statusFilter !== undefined && updated.status !== this.statusFilter) {
       this.load();
       return;
@@ -75,7 +75,7 @@ export class TaskList {
 
   private onUpdateError(err: HttpErrorResponse, select: HTMLSelectElement, previousValue: number): void {
     this.error.set(getErrorMessage(err));
-    // El modelo no cambió, así que Angular no actualiza el DOM: se devuelve el select a mano.
+    // The model did not change, so Angular does not update the DOM: reset the select manually.
     select.value = String(previousValue);
   }
 }

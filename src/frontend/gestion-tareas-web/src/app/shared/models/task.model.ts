@@ -8,7 +8,7 @@ export type TaskPriority = 'Low' | 'Medium' | 'High';
 
 export interface TaskAdditionalInfo {
   priority?: TaskPriority | null;
-  /** Format: yyyy-MM-dd (DateOnly en la API). */
+  /** Format: yyyy-MM-dd (DateOnly in the API). */
   estimatedEndDate?: string | null;
   tags?: string[] | null;
 }
