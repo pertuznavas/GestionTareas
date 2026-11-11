@@ -1,0 +1,3 @@
+﻿namespace GestionTareasApi.Dtos.Tasks;
+
+public record TaskDto(int Id, string Title, string? Description, DateTime CreatedAt);
