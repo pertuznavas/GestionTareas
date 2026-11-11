@@ -32,6 +32,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             entity.Property(t => t.Description).HasMaxLength(150);
 
             entity.HasOne(t => t.User).WithMany(u => u.Tasks).HasForeignKey(t => t.UserId).OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasIndex(t => new { t.UserId, t.Status, t.CreatedAt });
         });
     }
 }

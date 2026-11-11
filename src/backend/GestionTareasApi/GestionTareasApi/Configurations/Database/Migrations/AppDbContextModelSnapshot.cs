@@ -53,7 +53,7 @@ namespace GestionTareasApi.Configurations.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "Status", "CreatedAt");
 
                     b.ToTable("Tasks");
                 });
