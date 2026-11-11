@@ -69,7 +69,7 @@ Each task's additional info (priority, estimated end date and tags) is stored as
 ## Security
 
 - Input validation with data annotations on the DTOs.
-- Global exception handler: unexpected errors return a generic message, without internal details.
+- Errors follow the RFC 9457 `ProblemDetails` format. Unexpected errors return a generic message, without internal details.
 - CORS limited to the origins in `Cors:AllowedOrigins` (`appsettings.json`).
 - HTTPS redirection, and HSTS outside Development.
 - Connection string kept in user secrets, out of the repository.

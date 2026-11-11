@@ -1,10 +1,15 @@
-﻿using GestionTareasApi.Shared.Exceptions;
+using GestionTareasApi.Shared.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace GestionTareasApi.Configurations.Middlewares;
 
-public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+/// <summary>
+/// Turns exceptions into RFC 9457 <see cref="ProblemDetails"/> responses.
+/// Unexpected errors return a generic message so internal details are not exposed.
+/// </summary>
+public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger, IProblemDetailsService problemDetailsService) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
@@ -27,16 +32,17 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
             logger.LogWarning("Exception {Type} in {Path}: {Message}", exception.GetType().Name, httpContext.Request.Path, exception.Message);
         }
 
-        var error = new
-        {
-            Title = title,
-            ErrorCode = exception is AppException appEx ? appEx.ErrorCode : 0,
-            ErrorMessage = isServerError ? "An unexpected error occurred. Please try again later." : exception.Message,
-        };
-
         httpContext.Response.StatusCode = (int)statusCode;
-        await httpContext.Response.WriteAsJsonAsync(error, cancellationToken);
 
-        return true;
+        return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
+        {
+            HttpContext = httpContext,
+            ProblemDetails = new ProblemDetails
+            {
+                Status = (int)statusCode,
+                Title = title,
+                Detail = isServerError ? "An unexpected error occurred. Please try again later." : exception.Message,
+            },
+        });
     }
 }

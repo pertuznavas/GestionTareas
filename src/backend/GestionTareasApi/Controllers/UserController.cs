@@ -30,7 +30,7 @@ public class UserController(IUserService userService, ILogger<UserController> lo
     /// <response code="404">The user does not exist.</response>
     [HttpGet("{id:int}")]
     [ProducesResponseType<UserDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> GetByIdAsync(int id)
     {
         logger.LogInformation("Getting user with Id: {Id}", id);
@@ -46,8 +46,8 @@ public class UserController(IUserService userService, ILogger<UserController> lo
     /// <response code="409">A user with the same email already exists.</response>
     [HttpPost]
     [ProducesResponseType<UserDto>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<UserDto>> PostAsync(CreateUserDto createUserDto)
     {
         logger.LogInformation("Creating User with Name: {Name} and Email: {Email}", createUserDto.Name, createUserDto.Email);

@@ -34,7 +34,7 @@ public class TaskController(ITaskService taskService, ILogger<TaskController> lo
     /// <response code="404">The task does not exist.</response>
     [HttpGet("{id:int}")]
     [ProducesResponseType<TaskDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> GetByIdAsync(int id)
     {
         logger.LogInformation("Getting task with Id: {Id}", id);
@@ -50,8 +50,8 @@ public class TaskController(ITaskService taskService, ILogger<TaskController> lo
     /// <response code="404">The user does not exist.</response>
     [HttpPost]
     [ProducesResponseType<TaskDto>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> PostAsync(CreateTaskDto createTaskDto)
     {
         var task = await taskService.CreateTaskAsync(createTaskDto);
@@ -68,8 +68,8 @@ public class TaskController(ITaskService taskService, ILogger<TaskController> lo
     /// <response code="404">The task does not exist.</response>
     [HttpPut("{id:int}/status")]
     [ProducesResponseType<TaskDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> PutAsync(int id, UpdateTaskStatusDto updateTaskStatusDto)
     {
         logger.LogInformation("Changing status to task with ID: {Id} to Status: {Status}", id, updateTaskStatusDto.Status);
@@ -85,7 +85,7 @@ public class TaskController(ITaskService taskService, ILogger<TaskController> lo
     /// <response code="404">The task or the user does not exist.</response>
     [HttpPut("{id:int}/user")]
     [ProducesResponseType<TaskDto>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> AssignTaskAsync(int id, AssignTaskDto assignTaskDto)
     {
         logger.LogInformation("Assigning task with ID: {Id} to User with Id: {UserId}", id, assignTaskDto.UserId);

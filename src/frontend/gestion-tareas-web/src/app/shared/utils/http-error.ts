@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-/** Extrae un mensaje legible de los errores que devuelve la API. */
+/** Extrae un mensaje legible de los errores de la API, que siguen el formato ProblemDetails (RFC 9457). */
 export function getErrorMessage(error: HttpErrorResponse): string {
   if (error.status === 0) {
     return 'No se pudo conectar con la API.';
@@ -8,14 +8,10 @@ export function getErrorMessage(error: HttpErrorResponse): string {
 
   const body = error.error;
 
-  if (body?.errorMessage) {
-    return body.errorMessage;
-  }
-
   // Errores de validación de [ApiController] (ValidationProblemDetails).
   if (body?.errors) {
     return Object.values(body.errors as Record<string, string[]>).flat().join(' ');
   }
 
-  return body?.title ?? 'Ocurrió un error inesperado.';
+  return body?.detail ?? body?.title ?? 'Ocurrió un error inesperado.';
 }
