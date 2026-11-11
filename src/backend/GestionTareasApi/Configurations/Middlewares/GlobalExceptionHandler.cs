@@ -17,7 +17,7 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger, IPro
         {
             BadRequestException => (HttpStatusCode.BadRequest, "Bad request"),
             NotFoundException => (HttpStatusCode.NotFound, "Not found"),
-            AppException => (HttpStatusCode.Conflict, "Operation not allowed"),
+            ConflictException => (HttpStatusCode.Conflict, "Conflict"),
             _ => (HttpStatusCode.InternalServerError, "Internal server error")
         };
 

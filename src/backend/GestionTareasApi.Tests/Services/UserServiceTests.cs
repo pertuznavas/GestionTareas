@@ -28,13 +28,13 @@ public class UserServiceTests
     }
 
     [Fact]
-    public async Task CreateUserAsync_RepeatedEmail_ThrowsAppException()
+    public async Task CreateUserAsync_RepeatedEmail_ThrowsConflictException()
     {
         await AddUserAsync("User 1", "correo@correo.com");
 
         var dto = new CreateUserDto { Name = "User 2", Email = "correo@correo.com" };
 
-        await Assert.ThrowsAsync<AppException>(() => _service.CreateUserAsync(dto));
+        await Assert.ThrowsAsync<ConflictException>(() => _service.CreateUserAsync(dto));
     }
 
     [Fact]

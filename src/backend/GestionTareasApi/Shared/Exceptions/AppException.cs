@@ -1,15 +1,16 @@
 ﻿namespace GestionTareasApi.Shared.Exceptions;
 
-public class AppException : Exception
+public abstract class AppException : Exception
 {
-    public AppException()
-    {   
-    }
-    public AppException(string message):base(message)
+    protected AppException()
     {
     }
 
-    public AppException(string? message, Exception? innerException) : base(message, innerException)
+    protected AppException(string message) : base(message)
+    {
+    }
+
+    protected AppException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

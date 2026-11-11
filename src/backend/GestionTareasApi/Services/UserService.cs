@@ -13,7 +13,7 @@ public class UserService(AppDbContext db) : IUserService
     public async Task<UserDto> CreateUserAsync(CreateUserDto createUserDto)
     {
         if (await db.Users.AnyAsync(u => u.Email == createUserDto.Email))
-            throw new AppException("There is a user with the provided email");
+            throw new ConflictException("There is a user with the provided email");
 
         var user = createUserDto.ToEntity();
 
@@ -29,5 +29,5 @@ public class UserService(AppDbContext db) : IUserService
         return await db.Users.Select(u => u.ToDto()).ToListAsync();
     }
 
-    private async Task<User> GetUser(int userId) => await db.Users.FindAsync(userId) ?? throw new NotFoundException(404, $"User with Id: {userId} does not exist");
+    private async Task<User> GetUser(int userId) => await db.Users.FindAsync(userId) ?? throw new NotFoundException($"User with Id: {userId} does not exist");
 }

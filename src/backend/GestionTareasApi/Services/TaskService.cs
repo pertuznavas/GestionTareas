@@ -26,7 +26,7 @@ public class TaskService(AppDbContext db) : ITaskService
     public async Task<TaskDto> CreateTaskAsync(CreateTaskDto createTaskDto)
     {
         if (!await db.Users.AnyAsync(u => u.Id == createTaskDto.UserId))
-            throw new NotFoundException(404, $"User with Id: {createTaskDto.UserId} does not exist");
+            throw new NotFoundException($"User with Id: {createTaskDto.UserId} does not exist");
 
         var task = createTaskDto.ToEntity();
 
@@ -41,7 +41,7 @@ public class TaskService(AppDbContext db) : ITaskService
         var task = await GetTask(taskId);
 
         if (!await db.Users.AnyAsync(u => u.Id == userId))
-            throw new NotFoundException(404, $"User with Id: {userId} does not exist");
+            throw new NotFoundException($"User with Id: {userId} does not exist");
 
         task.UserId = userId;
         await db.SaveChangesAsync();
@@ -62,7 +62,7 @@ public class TaskService(AppDbContext db) : ITaskService
         return task.ToDto();
     }
 
-    private async Task<TaskItem> GetTask(int taskId) => await db.Tasks.FindAsync(taskId) ?? throw new NotFoundException(404, $"Task with Id: {taskId} does not exist");
+    private async Task<TaskItem> GetTask(int taskId) => await db.Tasks.FindAsync(taskId) ?? throw new NotFoundException($"Task with Id: {taskId} does not exist");
 
     private static void ValidateStatusTransition(TaskItemStatus current, TaskItemStatus next)
     {

@@ -6,11 +6,11 @@ public class NotFoundException : AppException
     {
     }
 
-    public NotFoundException(int errorCode, string message) : base(message)
+    public NotFoundException(string message) : base(message)
     {
     }
 
-    public NotFoundException(int errorCode, string? message, Exception? innerException) : base(message, innerException)
+    public NotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

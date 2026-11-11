@@ -13,7 +13,7 @@ public interface IUserService
     /// </summary>
     /// <param name="createUserDto">User data.</param>
     /// <returns>The created user.</returns>
-    /// <exception cref="AppException">A user with the same email already exists (409).</exception>
+    /// <exception cref="ConflictException">A user with the same email already exists.</exception>
     Task<UserDto> CreateUserAsync(CreateUserDto createUserDto);
 
     /// <summary>
