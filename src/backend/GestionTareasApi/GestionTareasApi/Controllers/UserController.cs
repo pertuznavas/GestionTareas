@@ -15,10 +15,18 @@ public class UserController(IUserService userService, ILogger<UserController> lo
         return await userService.GetUsersAsync();
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<UserDto>> GetByIdAsync(int id)
+    {
+        logger.LogInformation("Getting user with Id: {Id}", id);
+        return await userService.GetUserByIdAsync(id);
+    }
+
     [HttpPost]
     public async Task<ActionResult<UserDto>> PostAsync(CreateUserDto createUserDto)
     {
         logger.LogInformation("Creating User with Name: {Name} and Email: {Email}", createUserDto.Name, createUserDto.Email);
-        return await userService.CreateUserAsync(createUserDto);
+        var user = await userService.CreateUserAsync(createUserDto);
+        return Created($"/api/users/{user.Id}", user);
     }
 }

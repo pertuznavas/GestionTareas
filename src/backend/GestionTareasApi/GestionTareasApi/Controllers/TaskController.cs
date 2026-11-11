@@ -1,6 +1,8 @@
 ﻿using GestionTareasApi.Contracts;
 using GestionTareasApi.Dtos.Tasks;
+using GestionTareasApi.Dtos.Users;
 using GestionTareasApi.Enums;
+using GestionTareasApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionTareasApi.Controllers;
@@ -16,10 +18,18 @@ public class TaskController(ITaskService taskService, ILogger<TaskController> lo
         return await taskService.GetTasksAsync(status);
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<TaskDto>> GetByIdAsync(int id)
+    {
+        logger.LogInformation("Getting task with Id: {Id}", id);
+        return await taskService.GetTaskByIdAsync(id);
+    }
+
     [HttpPost]
     public async Task<ActionResult<TaskDto>> PostAsync(CreateTaskDto createTaskDto)
     {
-        return await taskService.CreateTaskAsync(createTaskDto);
+        var task = await taskService.CreateTaskAsync(createTaskDto);
+        return Created($"/api/tasks/{task.Id}", task);
     }
 
     [HttpPut("{id:int}/status")]

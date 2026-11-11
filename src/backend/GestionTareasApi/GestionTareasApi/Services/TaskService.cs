@@ -21,6 +21,8 @@ public class TaskService(AppDbContext db) : ITaskService
         return await query.OrderByDescending(t => t.CreatedAt).Select(t => t.ToDto()).ToListAsync();
     }
 
+    public async Task<TaskDto> GetTaskByIdAsync(int id) => (await GetTask(id)).ToDto();
+
     public async Task<TaskDto> CreateTaskAsync(CreateTaskDto createTaskDto)
     {
         if (!await db.Users.AnyAsync(u => u.Id == createTaskDto.UserId))
