@@ -1,11 +1,11 @@
-<h2>Usuarios</h2>
+<h2>Users</h2>
 
 <form class="form" [formGroup]="form" (ngSubmit)="save()">
   <label>
-    Nombre
+    Name
     <input formControlName="name" />
     @if (form.controls.name.touched && form.controls.name.invalid) {
-      <span class="error">Entre 3 y 50 caracteres.</span>
+      <span class="error">Between 3 and 50 characters.</span>
     }
   </label>
 
@@ -13,11 +13,11 @@
     Email
     <input type="email" formControlName="email" />
     @if (form.controls.email.touched && form.controls.email.invalid) {
-      <span class="error">Ingresa un email válido.</span>
+      <span class="error">Enter a valid email.</span>
     }
   </label>
 
-  <button type="submit">Crear usuario</button>
+  <button type="submit">Create user</button>
 </form>
 
 @if (error()) {
@@ -28,9 +28,9 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Nombre</th>
+      <th>Name</th>
       <th>Email</th>
-      <th>Creado</th>
+      <th>Created</th>
     </tr>
   </thead>
   <tbody>
@@ -43,7 +43,7 @@
       </tr>
     } @empty {
       <tr>
-        <td colspan="4">No hay usuarios.</td>
+        <td colspan="4">No users yet.</td>
       </tr>
     }
   </tbody>

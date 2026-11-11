@@ -1,17 +1,17 @@
 <div class="toolbar">
-  <h2>Tareas</h2>
+  <h2>Tasks</h2>
 
   <label>
-    Estado
+    Status
     <select #filter (change)="filterByStatus(filter.value)">
-      <option value="">Todos</option>
+      <option value="">All</option>
       @for (status of statuses; track status.value) {
         <option [value]="status.value">{{ status.label }}</option>
       }
     </select>
   </label>
 
-  <a routerLink="/tasks/new">Nueva tarea</a>
+  <a routerLink="/tasks/new">New task</a>
 </div>
 
 @if (error()) {
@@ -21,13 +21,13 @@
 <table>
   <thead>
     <tr>
-      <th>Título</th>
-      <th>Estado</th>
-      <th>Usuario</th>
-      <th>Prioridad</th>
-      <th>Fecha estimada</th>
-      <th>Etiquetas</th>
-      <th>Creada</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>User</th>
+      <th>Priority</th>
+      <th>Estimated end date</th>
+      <th>Tags</th>
+      <th>Created</th>
     </tr>
   </thead>
   <tbody>
@@ -60,7 +60,7 @@
       </tr>
     } @empty {
       <tr>
-        <td colspan="7">No hay tareas.</td>
+        <td colspan="7">No tasks yet.</td>
       </tr>
     }
   </tbody>

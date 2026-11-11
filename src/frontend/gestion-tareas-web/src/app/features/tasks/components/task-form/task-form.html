@@ -1,43 +1,43 @@
-<h2>Nueva tarea</h2>
+<h2>New task</h2>
 
 <form class="form" [formGroup]="form" (ngSubmit)="save()">
   <label>
-    Título
+    Title
     <input formControlName="title" />
     @if (form.controls.title.touched && form.controls.title.invalid) {
-      <span class="error">Entre 3 y 50 caracteres.</span>
+      <span class="error">Between 3 and 50 characters.</span>
     }
   </label>
 
   <label>
-    Descripción
+    Description
     <textarea formControlName="description" rows="3"></textarea>
     @if (form.controls.description.invalid) {
-      <span class="error">Máximo 150 caracteres.</span>
+      <span class="error">Maximum 150 characters.</span>
     }
   </label>
 
   <label>
-    Usuario
+    User
     <select formControlName="userId">
-      <option [ngValue]="0" disabled>Selecciona un usuario</option>
+      <option [ngValue]="0" disabled>Select a user</option>
       @for (user of users(); track user.id) {
         <option [ngValue]="user.id">{{ user.name }}</option>
       }
     </select>
     @if (form.controls.userId.touched && form.controls.userId.invalid) {
-      <span class="error">Selecciona un usuario.</span>
+      <span class="error">Select a user.</span>
     }
   </label>
 
   <fieldset>
-    <legend>Información adicional (opcional)</legend>
+    <legend>Additional info (optional)</legend>
 
     <div class="form">
       <label>
-        Prioridad
+        Priority
         <select formControlName="priority">
-          <option value="">Sin prioridad</option>
+          <option value="">No priority</option>
           @for (priority of priorities; track priority) {
             <option [value]="priority">{{ priority }}</option>
           }
@@ -45,14 +45,14 @@
       </label>
 
       <label>
-        Fecha estimada de fin
+        Estimated end date
         <input type="date" formControlName="estimatedEndDate" />
       </label>
 
       <label>
-        Etiquetas
+        Tags
         <input formControlName="tags" placeholder="frontend, auth, ui" />
-        <span class="hint">Separadas por coma.</span>
+        <span class="hint">Comma-separated.</span>
       </label>
     </div>
   </fieldset>
@@ -62,7 +62,7 @@
   }
 
   <div>
-    <button type="submit">Crear tarea</button>
-    <a routerLink="/tasks">Cancelar</a>
+    <button type="submit">Create task</button>
+    <a routerLink="/tasks">Cancel</a>
   </div>
 </form>

@@ -19,9 +19,9 @@ export class TaskList {
   private readonly userService = inject(UserService);
 
   protected readonly statuses = [
-    { value: TaskStatus.Pending, label: 'Pendiente' },
-    { value: TaskStatus.InProgress, label: 'En progreso' },
-    { value: TaskStatus.Done, label: 'Completada' },
+    { value: TaskStatus.Pending, label: 'Pending' },
+    { value: TaskStatus.InProgress, label: 'In progress' },
+    { value: TaskStatus.Done, label: 'Done' },
   ];
 
   protected readonly tasks = signal<Task[]>([]);
