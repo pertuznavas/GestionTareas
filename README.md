@@ -1,5 +1,7 @@
 # GestionTareas
 
+[![CI](https://github.com/pertuznavas/GestionTareas/actions/workflows/ci.yml/badge.svg)](https://github.com/pertuznavas/GestionTareas/actions/workflows/ci.yml)
+
 Gestión de tareas con usuarios: API en ASP.NET Core y frontend en Angular.
 
 ## Estructura
